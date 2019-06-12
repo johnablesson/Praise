@@ -8,7 +8,7 @@ using Praize.DataAccess;
 
 namespace Praize.Api.Migrations
 {
-    [DbContext(typeof(PraizeContext))]
+    [DbContext(typeof(PraizeDBContext))]
     partial class PraizeContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

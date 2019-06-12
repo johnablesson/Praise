@@ -11,7 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Praize.Business.Managers;
+using Praize.Business.Repositories;
+using Praize.Business.Repositories.Interfaces;
 using Praize.DataAccess;
+using Praize.DataAccess.Entities;
 
 namespace Praise
 {
@@ -27,7 +31,13 @@ namespace Praise
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PraizeContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PraizeDB"), b => b.MigrationsAssembly("Praize.Api")));
+            services.AddDbContext<PraizeDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PraizeDB"), b => b.MigrationsAssembly("Praize.Api")));
+            services.AddTransient<IAccountManager, AccountManager>();
+            services.AddTransient<IRepository<User>, Repository<User>>();
+            services.AddTransient<IRepository<Address>, Repository<Address>>();
+            services.AddTransient<IRepository<PhoneNumber>, Repository<PhoneNumber>>();
+            services.AddTransient<IAccountManager, AccountManager>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

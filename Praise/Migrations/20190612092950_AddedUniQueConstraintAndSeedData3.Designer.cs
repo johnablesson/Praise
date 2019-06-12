@@ -10,8 +10,8 @@ using Praize.DataAccess;
 namespace Praize.Api.Migrations
 {
     [DbContext(typeof(PraizeDBContext))]
-    [Migration("20190612090509_AddedDefaultDate2")]
-    partial class AddedDefaultDate2
+    [Migration("20190612092950_AddedUniQueConstraintAndSeedData3")]
+    partial class AddedUniQueConstraintAndSeedData3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,7 +80,22 @@ namespace Praize.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("AddressTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Current"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Permanent"
+                        });
                 });
 
             modelBuilder.Entity("Praize.DataAccess.Entities.PhoneNumber", b =>
@@ -103,6 +118,9 @@ namespace Praize.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Number")
+                        .IsUnique();
+
                     b.HasIndex("UserId");
 
                     b.ToTable("PhoneNumbers");
@@ -123,7 +141,38 @@ namespace Praize.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasFilter("[Name] IS NOT NULL");
+
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Super Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Manager"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Lead"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Associate"
+                        });
                 });
 
             modelBuilder.Entity("Praize.DataAccess.Entities.User", b =>
@@ -161,7 +210,14 @@ namespace Praize.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
+
                     b.HasIndex("RoleId");
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });

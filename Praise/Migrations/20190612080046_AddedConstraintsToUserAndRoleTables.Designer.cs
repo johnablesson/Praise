@@ -9,7 +9,7 @@ using Praize.DataAccess;
 
 namespace Praize.Api.Migrations
 {
-    [DbContext(typeof(PraizeContext))]
+    [DbContext(typeof(PraizeDBContext))]
     [Migration("20190612080046_AddedConstraintsToUserAndRoleTables")]
     partial class AddedConstraintsToUserAndRoleTables
     {

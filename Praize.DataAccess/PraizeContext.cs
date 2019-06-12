@@ -6,9 +6,13 @@ using System.Text;
 
 namespace Praize.DataAccess
 {
-    public class PraizeContext : DbContext
+    public class PraizeDBContext : DbContext
     {
-        public PraizeContext(DbContextOptions<PraizeContext> options) : base(options)
+        public PraizeDBContext()
+        {
+
+        }
+        public PraizeDBContext(DbContextOptions<PraizeDBContext> options) : base(options)
         {
 
         }

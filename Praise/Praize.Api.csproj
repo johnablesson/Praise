@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Praise.Contracts\Praize.Contracts.csproj" />
+    <ProjectReference Include="..\Praize.Business\Praize.Business.csproj" />
     <ProjectReference Include="..\Praize.DataAccess\Praize.DataAccess.csproj" />
     <ProjectReference Include="..\Praize.Models\Praize.Models.csproj" />
   </ItemGroup>
