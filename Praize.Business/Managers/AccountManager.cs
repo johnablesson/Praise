@@ -8,7 +8,10 @@ using Praize.DataAccess.Entities;
 using Praize.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Praize.Business.Managers
 {
@@ -21,7 +24,7 @@ namespace Praize.Business.Managers
             _unitOfWork = unitOfWork;
         }
 
-        public void CreateUser(RegisterUserContract registerUserContract)
+        public async Task<int> CreateUser(RegisterUserContract registerUserContract)
         {
             List<ApiError> errors = new List<ApiError>();
 
@@ -36,11 +39,11 @@ namespace Praize.Business.Managers
             }
 
             var user = registerUserContract.AsUserEntity();
-
             _unitOfWork.Users.Add(user);
-            _unitOfWork.Complete().GetAwaiter().GetResult();
-
-
+            _unitOfWork.Adresses.Add(registerUserContract.CurrentAddress.AsAddressEntity(user.Id));
+            _unitOfWork.Adresses.Add(registerUserContract.PermanentAddress.AsAddressEntity(user.Id));
+            _unitOfWork.PhoneNumbers.Add(registerUserContract.AsPhoneNumberEntity(user.Id));
+            return await _unitOfWork.CompleteAsync().ConfigureAwait(false);
 
         }
     }

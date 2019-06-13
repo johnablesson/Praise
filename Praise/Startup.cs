@@ -32,12 +32,8 @@ namespace Praise
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PraizeDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PraizeDB"), b => b.MigrationsAssembly("Praize.Api")));
-            services.AddTransient<IAccountManager, AccountManager>();
-            services.AddTransient<IRepository<User>, Repository<User>>();
-            services.AddTransient<IRepository<Address>, Repository<Address>>();
-            services.AddTransient<IRepository<PhoneNumber>, Repository<PhoneNumber>>();
-            services.AddTransient<IAccountManager, AccountManager>();
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IAccountManager, AccountManager>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

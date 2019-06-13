@@ -1,9 +1,10 @@
 ﻿using Praize.Contracts;
+using System.Threading.Tasks;
 
 namespace Praize.Business.Managers
 {
     public interface IAccountManager
     {
-        void CreateUser(RegisterUserContract registerUserContract);
+        Task<int> CreateUser(RegisterUserContract registerUserContract);
     }
 }

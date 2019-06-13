@@ -12,4 +12,10 @@ namespace Praize.Business.Enumerations
         Lead = 4,
         Associate = 5
     }
+
+    public  enum EAddressType
+    {
+        Current = 1,
+        Permanent = 2
+    }
 }

@@ -6,10 +6,15 @@ using System.Text;
 
 namespace Praize.Business.Mappers
 {
-    public static class RegisterUserContractExtenders
+    public static class RegisterUserContractMapper
     {
         public static User AsUserEntity(this RegisterUserContract usr)
         {
+            if(usr == null)
+            {
+                return null;
+            }
+
             return new User() {
                 UserName = usr.UserName,
                 Email = usr.Email,
@@ -20,5 +25,22 @@ namespace Praize.Business.Mappers
                 RoleId = usr.RoleId,
             };
         }
+
+        public static PhoneNumber AsPhoneNumberEntity(this RegisterUserContract usr, Guid userId)
+        {
+            if (usr == null)
+            {
+                return null;
+            }
+
+            return new PhoneNumber()
+            {
+               Number = usr.PhoneNumber,
+               Extension = null,
+               UserId = userId
+            };
+        }
+
+
     }
 }

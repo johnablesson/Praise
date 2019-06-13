@@ -9,6 +9,8 @@ namespace Praize.Business.Repositories
     public interface IUnitOfWork
     {
         IUserRepository Users { get; }
-        Task<int> Complete();
+        IAddressRepository Adresses { get; }
+        IPhoneNumberRepository PhoneNumbers { get; }
+        Task<int> CompleteAsync();
     }
 }

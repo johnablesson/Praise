@@ -29,9 +29,9 @@ namespace Praize.Controllers
 
         [HttpPost]
         [Route("Account/Register")]
-        public void RegisterUser(RegisterUserContract registerUserContract)
+        public Task<int> RegisterUser(RegisterUserContract registerUserContract)
         {
-            _accountManager.CreateUser(registerUserContract);
+            return _accountManager.CreateUser(registerUserContract);
         }
     }
 }
